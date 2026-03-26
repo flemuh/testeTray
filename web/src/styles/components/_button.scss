@@ -1,0 +1,6 @@
+@use '../mixins' as *;
+
+.btn-primary,
+.google-login-button {
+  @include button-primary;
+}

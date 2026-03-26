@@ -1,0 +1,22 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.user-form,
+.filters-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.4rem;
+
+  input {
+    @include input;
+  }
+}
+
+.error-text,
+.feedback-error {
+  color: $color-danger;
+}
