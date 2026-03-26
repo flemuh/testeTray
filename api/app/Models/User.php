@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 
 class User extends Model
 {
@@ -17,4 +19,41 @@ class User extends Model
         'cpf',
         'birth_date',
     ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'google_token_expires_at' => 'datetime',
+        'birth_date' => 'date',
+    ];
+
+    protected function cpf(): Attribute
+    {
+        return Attribute::make(
+            set: fn (?string $value) => $value
+                ? preg_replace('/\D/', '', $value)
+                : null,
+        );
+    }
+
+    public function isRegistrationComplete(): bool
+    {
+        return !empty($this->name)
+            && !empty($this->cpf)
+            && !empty($this->birth_date);
+    }
+
+    protected function cpfFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) =>
+                isset($attributes['cpf'])
+                    ? preg_replace(
+                        "/(\d{3})(\d{3})(\d{3})(\d{2})/",
+                        "$1.$2.$3-$4",
+                        $attributes['cpf']
+                    )
+                    : null
+        );
+    }
+
 }
