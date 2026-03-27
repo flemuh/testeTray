@@ -61,7 +61,7 @@ Na raiz do projeto:
 docker compose up -d --build
 ```
 
-### 📊 subida do laravel e migrations
+### 📊 observar subida do laravel e migrations
 ```sh
 docker compose logs -f api 
 ```
@@ -118,6 +118,12 @@ Ver logs apenas da API:
 ```
 docker compose logs -f api
 ```
+
+Ver logs apenas da fila:
+```
+docker compose logs -f tray_queue
+```
+
 
 ## 🧠 Decisões Técnicas
 - Uso de Docker para padronização do ambiente

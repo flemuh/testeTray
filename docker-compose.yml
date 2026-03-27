@@ -65,6 +65,33 @@ services:
         condition: service_started
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
 
+  queue:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: tray_queue
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./api:/var/www/html
+      - tray_vendor:/var/www/html/vendor
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: tray_test
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    depends_on:
+      mysql:
+        condition: service_healthy
+      api:
+        condition: service_started
+    command: ["/entrypoint-queue.sh"]
+
 volumes:
   mysql_data:
   tray_vendor:

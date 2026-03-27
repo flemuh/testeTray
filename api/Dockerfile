@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY docker/entrypoint-queue.sh /entrypoint-queue.sh
+
+RUN chmod +x /entrypoint.sh /entrypoint-queue.sh
 
 EXPOSE 8000
