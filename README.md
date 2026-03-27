@@ -239,24 +239,9 @@ Isso evita bloqueio da requisição e melhora performance.
 
 ---
 
-## Testes da API
-```
-docker compose exec api php artisan test
-```
-
-### Testes do frontend
-```
-docker compose exec web npm run test
-```
-
 ### Qualidade da API
 ```
 composer quality
-```
-
-### Qualidade do frontend
-```
-npm run quality
 ```
 
 ## Decisões técnicas — Backend
