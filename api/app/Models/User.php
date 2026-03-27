@@ -2,31 +2,65 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+/**
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $email
+ * @property string|null $cpf
+ * @property string|null $birth_date
+ * @property string|null $google_id
+ * @property array|string|null $google_token
+ */
+class User extends Model
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $fillable = [
+        'google_id',
+        'google_access_token',
+        'google_refresh_token',
+        'google_token_expires_at',
+        'email',
+        'email_verified_at',
+        'name',
+        'cpf',
+        'birth_date',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'google_token_expires_at' => 'datetime',
+        'birth_date' => 'date:d/m/Y',
+    ];
+
+    protected function cpf(): Attribute
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return Attribute::make(
+            set: fn (?string $value) => $value ? preg_replace('/\D/', '', $value) : null
+        );
+    }
+
+    public function isRegistrationComplete(): bool
+    {
+        return ! empty($this->name)
+            && ! empty($this->cpf)
+            && ! empty($this->birth_date);
+    }
+
+    protected function cpfFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($attributes) => isset($attributes['cpf'])
+                ? preg_replace(
+                    '/(\d{3})(\d{3})(\d{3})(\d{2})/',
+                    '$1.$2.$3-$4',
+                    $attributes['cpf']
+                )
+                : null
+        );
     }
 }

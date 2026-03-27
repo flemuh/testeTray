@@ -1,0 +1,12 @@
+@use '../mixins' as *;
+
+.complete-registration-page {
+  padding: 2rem;
+}
+
+.registration-card {
+  @include card;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem;
+}

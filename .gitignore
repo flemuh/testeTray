@@ -18,6 +18,7 @@ Thumbs.db
 /api/node_modules
 /api/storage/*.key
 /api/storage/logs/*
+/api/storage/phpstan/*
 /api/storage/framework/cache/*
 /api/storage/framework/sessions/*
 /api/storage/framework/views/*

@@ -1,0 +1,16 @@
+@use '../mixins' as *;
+
+.home-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.home-card {
+  @include card;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  text-align: center;
+}

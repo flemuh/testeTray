@@ -1,0 +1,13 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.users-page {
+  padding: 2rem;
+}
+
+.users-card {
+  @include card;
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 2rem;
+}
