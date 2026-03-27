@@ -6,6 +6,9 @@ on:
     branches:
       - main
       - dev
+      -
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   quality:
@@ -22,16 +25,16 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3' # Nota: Verifique se a 8.5 já está estável/disponível no runner
+          php-version: '8.5'
           coverage: none
 
       - name: Cache Composer
         uses: actions/cache@v4
         with:
-          path: api/vendor # Ajustado o caminho para o cache
-          key: ${{ runner.os }}-php-8.3-${{ hashFiles('api/composer.lock') }}
+          path: ./api/vendor
+          key: ${{ runner.os }}-php-8.5-${{ hashFiles('api/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-php-8.3-
+            ${{ runner.os }}-php-8.5-
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
