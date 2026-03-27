@@ -25,6 +25,9 @@ else
   echo "Vendor encontrado."
 fi
 
+chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+
 php artisan optimize:clear
 php artisan migrate --force
 
