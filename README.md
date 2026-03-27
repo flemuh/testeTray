@@ -1,6 +1,6 @@
-# 🚀 Fullstack Test - Laravel + Vue + Docker
+# Fullstack Test - Laravel + Vue + Docker
 
-## 📌 Objetivo
+## Objetivo
 
 Este projeto tem como objetivo demonstrar a construção de uma aplicação Full Stack com separação entre Back-End e Front-End, integração com autenticação via Google (OAuth) e boas práticas de desenvolvimento.
 
@@ -13,10 +13,10 @@ A aplicação permite:
 
 ---
 
-## 🧰 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Back-End
-- PHP 8.x
+- PHP 8.5
 - Laravel 13
 - MySQL 8
 - Arquitetura em camadas (Controller, Service, Repository)
@@ -32,11 +32,10 @@ A aplicação permite:
 
 ### Infraestrutura
 - Docker
-- Docker Compose
 
 ---
 
-## 🏗️ Estrutura do Projeto
+##  Estrutura do Projeto
 ```
 .
 ├── api/ # Laravel (Back-end)
@@ -47,7 +46,7 @@ A aplicação permite:
 └── README.md # Documentação
 ```
 
-## 🏛️ Arquitetura
+##  Arquitetura
 
 - API Laravel desacoplada do frontend Vue
 - Arquitetura em camadas:
@@ -147,7 +146,7 @@ docker compose exec api php artisan db:seed --class=UserSeeder
 ```
 ---
 
-### 🧹 Limpar ambiente
+### Limpar ambiente
 
 Remove containers, volumes e dados:
 
@@ -185,7 +184,7 @@ docker compose logs -f tray_queue
 
 ---
 
-## 🔌 Endpoints da API
+## Endpoints da API
 
 ### OAuth Google
 ```
@@ -214,7 +213,7 @@ GET /users
 
 ---
 
-## 🧠 Gerenciamento de Estado (Pinia)
+## Gerenciamento de Estado (Pinia)
 
 O Pinia é utilizado para centralizar o estado da listagem de usuários, incluindo:
 - Lista de usuários
@@ -226,7 +225,7 @@ A store `userStore` é responsável por consumir a API e fornecer os dados para 
 
 ---
 
-## 📬 Processamento Assíncrono (Queue)
+## Processamento Assíncrono (Queue)
 
 O envio de e-mail é realizado de forma assíncrona utilizando Laravel Queue.
 
@@ -260,19 +259,33 @@ composer quality
 npm run quality
 ```
 
-## Decisões técnicas
-- paginação no backend
-- filtro por nome e CPF
-- ordenação no backend
-- fila para envio de e-mail
-- índices para melhorar busca
-- estratégia pensada para volume alto
+## Decisões técnicas — Backend
+- Paginação server-side com limite por requisição
+- Filtros por nome e CPF com normalização de dados
+- Validação centralizada via Form Requests
+- Separação de responsabilidades (Controller, Service e Repository)
+- Transação para consistência na conclusão do cadastro
+- Envio assíncrono de e-mail via fila
+- Consultas enxutas com seleção de campos necessários
+- Preparação para uso de índices (CPF, nome e ordenação)
+- Arquitetura preparada para alto volume
+
+## Decisões técnicas — Frontend
+- Arquitetura modular por responsabilidade
+- Componentes reutilizáveis para login, filtros, formulário e tabela
+- Services para consumo da API
+- Store para centralização de estado
+- TypeScript para tipagem da aplicação
+- Sass modular para organização dos estilos
+- Utils para formatação e reaproveitamento de regras visuais
 
 ## Melhorias futuras
-- cobertura maior de testes
-- autenticação própria
-- ordenações adicionais
-- paginação mais avançada
+- Aumentar cobertura de testes na API e frontend
+- Adicionar autenticação própria com controle de acesso
+- Suportar ordenação dinâmica via query params
+- Evoluir paginação para cursor-based em alto volume
+- Implementar pipeline de qualidade no frontend
+- Introduzir interfaces para desacoplamento e testabilidade
 
 
 ## 🛠️ Problemas comuns
