@@ -72,23 +72,23 @@ A aplicação permite:
 
 ## Variáveis de ambiente
 
-### Copiar .env.example da API para .env
+### Copiar .env.example da 'api' para .env
 Preencher Dados :
 
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=
-MAIL_PASSWORD=""
-MAIL_FROM_ADDRESS=
+- MAIL_MAILER=smtp
+- MAIL_HOST=smtp.gmail.com
+- MAIL_PORT=587
+- MAIL_USERNAME=
+- MAIL_PASSWORD=""
+- MAIL_FROM_ADDRESS=
 
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
+- GOOGLE_CLIENT_ID=
+- GOOGLE_CLIENT_SECRET=
 
-### Copiar .env.example da WEB para .env
+### Copiar .env.example da 'web' para .env
 Preencher Dados :
 
-VITE_GOOGLE_CLIENT_ID
+VITE_GOOGLE_CLIENT_ID=
 
 ---
 
@@ -102,14 +102,18 @@ VITE_GOOGLE_CLIENT_ID
 
 ### ▶️ Subir a aplicação
 
+Na raiz do projeto/api - gerar nova key:
+```
+php artisan key:generate
+```
 Na raiz do projeto:
 
-```sh
+```
 docker compose up -d --build
 ```
 
 ### 📊 Após subida dos containers observar subida do laravel e migrations até finalizar
-```sh
+```
 docker compose logs -f api 
 ```
 
