@@ -9,7 +9,7 @@ class GoogleOAuthService
 {
     public function makeClient(): GoogleClient
     {
-        $client = new GoogleClient();
+        $client = new GoogleClient;
 
         $client->setClientId((string) config('services.google.client_id'));
         $client->setClientSecret((string) config('services.google.client_secret'));

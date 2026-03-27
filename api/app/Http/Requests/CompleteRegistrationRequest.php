@@ -17,7 +17,7 @@ class CompleteRegistrationRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],
-            'cpf' => ['required', 'string', 'size:14', 'unique:users,cpf,' . $userId],
+            'cpf' => ['required', 'string', 'size:14', 'unique:users,cpf,'.$userId],
             'birth_date' => ['required', 'date', 'before:today'],
         ];
     }

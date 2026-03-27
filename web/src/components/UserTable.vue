@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { User } from '@/types/user'
+import { useUserStore } from '@/stores/userStore'
+import { formatCpf } from '@/utils/format'
 
-defineProps<{ users: User[] }>()
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -17,11 +18,11 @@ defineProps<{ users: User[] }>()
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in userStore.users" :key="user.id">
           <td>{{ user.id }}</td>
           <td>{{ user.name ?? '-' }}</td>
           <td>{{ user.email ?? '-' }}</td>
-          <td>{{ user.cpf ?? '-' }}</td>
+          <td>{{ formatCpf(user.cpf) }}</td>
           <td>{{ user.birth_date ?? '-' }}</td>
         </tr>
       </tbody>

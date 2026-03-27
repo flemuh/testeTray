@@ -15,8 +15,7 @@ class SendRegistrationCompletedEmailJob implements ShouldQueue
     public function __construct(
         public int $userId,
         public string $email
-    ) {
-    }
+    ) {}
 
     public function handle(UserRepository $userRepository): void
     {

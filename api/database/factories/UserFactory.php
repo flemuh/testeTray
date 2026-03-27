@@ -15,15 +15,15 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'google_id' => fake()->uuid(),
+            'google_id' => (string) fake()->unique()->uuid(),
             'google_access_token' => fake()->sha256(),
             'google_refresh_token' => fake()->sha256(),
             'google_token_expires_at' => now()->addHour(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => fake()->unique()->uuid().'@example.com',
             'email_verified_at' => now(),
             'name' => fake()->name(),
-            'cpf' => preg_replace('/\D/', '', fake()->numerify('###########')),
-            'birth_date' => fake()->date(),
+            'cpf' => fake()->unique()->numerify('###########'),
+            'birth_date' => fake()->date('Y-m-d', '-18 years'),
         ];
     }
 }

@@ -27,19 +27,19 @@ class UserRepository
         return $user->refresh();
     }
 
-    public function paginateWithFilters(array $filters, int $perPage): LengthAwarePaginator
+    public function paginateWithFilters(array $filters, int $perPage, int $page): LengthAwarePaginator
     {
         return User::query()
             ->select(['id', 'name', 'email', 'cpf', 'birth_date', 'created_at'])
             ->when(
                 ! empty($filters['name']),
-                fn ($query) => $query->where('name', 'like', trim($filters['name']) . '%')
+                fn ($query) => $query->where('name', 'like', trim($filters['name']).'%')
             )
             ->when(
                 ! empty($filters['cpf']),
                 fn ($query) => $query->where('cpf', preg_replace('/\D+/', '', $filters['cpf']))
             )
             ->orderByDesc('id')
-            ->paginate($perPage);
+            ->paginate($perPage, ['*'], 'page', $page);
     }
 }

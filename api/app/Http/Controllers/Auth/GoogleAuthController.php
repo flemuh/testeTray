@@ -14,8 +14,7 @@ class GoogleAuthController extends Controller
     public function __construct(
         private readonly GoogleOAuthService $googleOAuthService,
         private readonly UserService $userService,
-    ) {
-    }
+    ) {}
 
     public function getLoginUrl(): JsonResponse
     {
@@ -36,11 +35,11 @@ class GoogleAuthController extends Controller
             );
 
             return redirect(
-                config('services.google.frontend_url') . '/complete-registration?user_id=' . $user->id
+                config('services.google.frontend_url').'/complete-registration?user_id='.$user->id
             );
         } catch (\Throwable) {
             return redirect(
-                config('services.google.frontend_url') . '/?error=google_auth_failed'
+                config('services.google.frontend_url').'/?error=google_auth_failed'
             );
         }
     }

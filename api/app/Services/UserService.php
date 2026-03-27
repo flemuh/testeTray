@@ -16,8 +16,7 @@ class UserService
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly GoogleOAuthService $googleOAuthService,
-    ) {
-    }
+    ) {}
 
     public function upsertGoogleUserFromCode(string $code): User
     {
@@ -34,7 +33,7 @@ class UserService
         $user = $this->userRepository->findByGoogleIdOrEmail(
             $googleData['google_id'] ?? null,
             $googleData['email'] ?? null
-        ) ?? new User();
+        ) ?? new User;
 
         $user->google_id = $googleData['google_id'] ?? $user->google_id;
         $user->google_access_token = $tokenData['access_token'];
@@ -86,8 +85,8 @@ class UserService
         });
     }
 
-    public function listUsers(array $filters, int $perPage): LengthAwarePaginator
+    public function listUsers(array $filters, int $perPage, int $page): LengthAwarePaginator
     {
-        return $this->userRepository->paginateWithFilters($filters, $perPage);
+        return $this->userRepository->paginateWithFilters($filters, $perPage, $page);
     }
 }

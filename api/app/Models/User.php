@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $email
+ * @property string|null $cpf
+ * @property string|null $birth_date
+ * @property string|null $google_id
+ * @property array|string|null $google_token
+ */
 class User extends Model
 {
     use HasFactory;
@@ -25,7 +34,7 @@ class User extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
         'google_token_expires_at' => 'datetime',
-        'birth_date' => 'date',
+        'birth_date' => 'date:d/m/Y',
     ];
 
     protected function cpf(): Attribute
