@@ -58,7 +58,7 @@
             "./vendor/bin/phpstan analyse --memory-limit=1G"
         ],
         "md": [
-           "php -d \"error_reporting=E_ALL & ~E_DEPRECATED\" ./vendor/bin/phpmd app,routes,config ansi phpmd.xml"
+           "./vendor/bin/phpmd app,routes,config ansi phpmd.xml"
         ],
         "quality": [
             "@cs:test",
