@@ -6,14 +6,13 @@ on:
     branches:
       - main
       - dev
-      -
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   quality:
     runs-on: ubuntu-latest
-    # Define que todos os comandos 'run' rodarão dentro da pasta api
+
     defaults:
       run:
         working-directory: ./api
