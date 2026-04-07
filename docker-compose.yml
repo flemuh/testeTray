@@ -4,8 +4,6 @@ services:
     container_name: tray_mysql
     restart: unless-stopped
     environment:
-      CHOKIDAR_USEPOLLING: true
-      WATCHER_USE_POLLING: true
       MYSQL_DATABASE: tray_test
       MYSQL_ROOT_PASSWORD: root
     ports:
@@ -54,7 +52,8 @@ services:
     restart: unless-stopped
     working_dir: /app
     environment:
-      - CHOKIDAR_USEPOLLING=true
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHER_USE_POLLING: "true"
     volumes:
       - ./web:/app
       - tray_node_modules:/app/node_modules
